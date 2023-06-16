@@ -18,7 +18,7 @@ setup(
     project_urls={
         'Homepage': 'https://wis3d.readthedocs.io/en/latest/',
         'Online Demo': 'http://wis3d.idr.ai/',
-        'Source Code': 'https://github.com/zju3dv/wis3d.git', 
+        'Source Code': 'https://github.com/zju3dv/wis3d.git',
     },
     description='A web-based 3D visualization tool for 3D computer vision.',
     long_description=long_description,
@@ -40,11 +40,13 @@ setup(
         'pillow',
         'scipy',
         'transforms3d',
-        'torch'
+        'torch',
+        "termcolor"
     ],
     entry_points={
         'console_scripts': [
-            'wis3d = wis3d:main'
+            'wis3d = wis3d:main',
+            'w3dcli = wis3d.cli:main'
         ]
     },
 )
