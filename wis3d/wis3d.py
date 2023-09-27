@@ -4,6 +4,7 @@ Some tips for this file:
 class method definition must be in a single line for correct doc generation.
 """
 import os
+import os.path as osp
 import json
 import base64
 import shutil
@@ -120,9 +121,15 @@ class Wis3D:
                     os.getcwd(), out_folder, sequence_name)
             else:
                 seq_out_folder = out_folder
-            if os.path.exists(seq_out_folder) and seq_out_folder not in Wis3D.has_removed and auto_remove:
-                shutil.rmtree(seq_out_folder)
-                Wis3D.has_removed.append(seq_out_folder)
+            if auto_remove:
+                if not osp.exists(seq_out_folder):
+                    Wis3D.has_removed.append(seq_out_folder)
+                elif os.path.exists(seq_out_folder) and seq_out_folder not in Wis3D.has_removed:
+                    shutil.rmtree(seq_out_folder)
+                    Wis3D.has_removed.append(seq_out_folder)
+            # if os.path.exists(seq_out_folder) and seq_out_folder not in Wis3D.has_removed and auto_remove:
+            #     shutil.rmtree(seq_out_folder)
+            #     Wis3D.has_removed.append(seq_out_folder)
             self.out_folder = out_folder
             self.sequence_name = sequence_name
             if xyz_pattern is None:
@@ -472,6 +479,7 @@ class Wis3D:
         boxes = []
         if axes is None:
             warnings.warn("Axes is not specified, use default axes rxyz. To preserve old behavior, use axes='sxyz'")
+            axes = "rxyz"
         for i in range(len(positions)):
             box_def = self.three_to_world @ affines.compose(
                 positions[i], euler.euler2mat(*eulers[i], axes), extents[i]
@@ -617,6 +625,7 @@ class Wis3D:
             centers: Union[np.ndarray, torch.Tensor],
             radius: Union[float, np.ndarray, torch.Tensor],
             colors=None,
+            scales=[1, 1, 1],
             *,
             name=None
     ) -> None:
@@ -647,7 +656,7 @@ class Wis3D:
         spheres = []
         if isinstance(radius, float):
             for i in range(len(centers)):
-                sphere = dict(center=centers[i].tolist(), radius=radius)
+                sphere = dict(center=centers[i].tolist(), radius=radius, scales=scales)
                 if colors is not None:
                     sphere.update({"color": colors[i].tolist()})
                 spheres.append(sphere)
