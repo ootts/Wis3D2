@@ -626,6 +626,7 @@ class Wis3D:
             radius: Union[float, np.ndarray, torch.Tensor],
             colors=None,
             scales=[1, 1, 1],
+            quaternion=[0, 0, 0, 1],
             *,
             name=None
     ) -> None:
@@ -656,7 +657,7 @@ class Wis3D:
         spheres = []
         if isinstance(radius, float):
             for i in range(len(centers)):
-                sphere = dict(center=centers[i].tolist(), radius=radius, scales=scales)
+                sphere = dict(center=centers[i].tolist(), radius=radius, scales=scales, quaternion=quaternion)
                 if colors is not None:
                     sphere.update({"color": colors[i].tolist()})
                 spheres.append(sphere)

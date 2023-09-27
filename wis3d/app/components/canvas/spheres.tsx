@@ -18,10 +18,11 @@ export const Spheres = memo<IProps>(function Spheres(props) {
     return (
         <group visible={visible}>
             {spheres.map((sphere, index) => {
-                const {center, radius, color, scales} = sphere;
+                const {center, radius, color, scales, quaternion} = sphere;
                 const userColor = color ? color.map(x => x / 250) : undefined;
                 return (
-                    <mesh position={center} scale={scales} key={index} onDoubleClick={centerOnDbClick}>
+                    <mesh position={center} quaternion={quaternion} scale={scales} key={index}
+                          onDoubleClick={centerOnDbClick}>
                         <sphereBufferGeometry args={[radius, 30, 30]}/>
                         <meshBasicMaterial
                             color={sphereColors && userColor ? userColor : defaultColor}
