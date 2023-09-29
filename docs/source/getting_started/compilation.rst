@@ -8,7 +8,7 @@ Cloning Wis3D
 
 .. code-block:: bash
 
-    git clone https://github.com/zju3dv/Wis3D.git
+    git clone https://github.com/ootts/Wis3D2.git
 
 
 Install dependencies

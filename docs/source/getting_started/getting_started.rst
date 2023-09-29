@@ -11,12 +11,11 @@ Installing from wheel file
 Install
 -------
 
-Go to the `GitHub release page <https://gitlab.sh.sensetime.com/3dv-research/wis3d/-/releases>`_ 
-and download the latest release. Then run 
+Run the following command to install Wis3D.
 
 .. code-block:: bash
 
-    pip install wis3d2
+    pip install https://ootts.github.io/wis3d-2.0.0-py3-none-any.whl
 
 
 Verify installation
@@ -35,6 +34,8 @@ If this works, Wis3D has been successfully installed. Congratulations!
 
 Running examples
 =================
+
+(This section is under construction.)
 
 Wis3D provides a complete set of testing data and a simple tutorial. See ``example`` for more details.
 
