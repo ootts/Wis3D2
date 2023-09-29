@@ -45,21 +45,25 @@ const Home = memo(function Home() {
     const frames = useXHR(framesUrl, "GET", "json", [], (ev) => {
         const length = (ev.currentTarget as XMLHttpRequest).response?.length;
         if (!length) {
-            console.log("no frames in this sequence")
+            // console.log("no frames in this sequence")
             setFrameIndex(0);
             localStorage.setItem('myFrameIndex', "0");
         } else if (frameIndex >= length) {
-            console.log("frameIndex >= length", frameIndex, length);
+            // console.log("frameIndex >= length", frameIndex, length);
             setFrameIndex(length - 1);
             localStorage.setItem('myFrameIndex', (length - 1).toString());
         } else {
-            console.log("else");
+            // console.log("else");
             let myFrameIndex = parseInt(localStorage.getItem("myFrameIndex"), 10);
             if (!isNaN(myFrameIndex)) {
-                console.log("myFrameIndex", myFrameIndex);
+                // console.log("myFrameIndex", myFrameIndex);
+                if (myFrameIndex >= length) {
+                    myFrameIndex = length - 1;
+                    localStorage.setItem('myFrameIndex', (length - 1).toString());
+                }
                 setFrameIndex(myFrameIndex);
             } else {
-                console.log("else else");
+                // console.log("else else");
                 setFrameIndex(frameIndex);
                 localStorage.setItem('myFrameIndex', frameIndex.toString());
             }

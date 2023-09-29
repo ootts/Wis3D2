@@ -625,8 +625,8 @@ class Wis3D:
             centers: Union[np.ndarray, torch.Tensor],
             radius: Union[float, np.ndarray, torch.Tensor],
             colors=None,
-            scales=[1, 1, 1],
-            quaternion=[0, 0, 0, 1],
+            scales: Union[np.ndarray, torch.Tensor] = [1, 1, 1],
+            quaternions: Union[np.ndarray, torch.Tensor] = [0, 0, 0, 1],
             *,
             name=None
     ) -> None:
@@ -634,9 +634,9 @@ class Wis3D:
         Add spheres
 
         :param centers: center of each sphere, shape: `(n, 3)` or `(3,)`
-
         :param radius: radius of each sphere, either float or shape of `(n,)` or `(1,)`
-
+        :param scales: scales of each sphere, shape: `(n, 3)`, defaults to [1,1,1], useful for ellipsoids
+        :param quaternions: rotations of each sphere, format wxyz, shape: `(n, 4)`, defaults to [1,0,0,0], useful for ellipsoids
         :param colors: colors of each box, shape: `(n, 3)`
 
         :param name: output name for the spheres
@@ -648,6 +648,15 @@ class Wis3D:
         centers = self.three_to_world @ np.hstack((centers, np.zeros((n, 1)))).T
         centers = centers[:3, :].T
 
+        scales = tensor2ndarray(scales)
+        scales = np.asarray(scales).reshape(-1, 3)
+        assert len(scales) == len(centers)
+
+        quaternions = tensor2ndarray(quaternions)
+        quaternions = np.asarray(quaternions).reshape(-1, 4)
+        quaternions = quaternions[:, [1, 2, 3, 0]]  # wxyz -> xyzw
+        assert len(quaternions) == len(centers)
+
         if colors is not None:
             colors = tensor2ndarray(colors)
             colors = np.asarray(colors).reshape(-1, 3)
@@ -657,7 +666,7 @@ class Wis3D:
         spheres = []
         if isinstance(radius, float):
             for i in range(len(centers)):
-                sphere = dict(center=centers[i].tolist(), radius=radius, scales=scales, quaternion=quaternion)
+                sphere = dict(center=centers[i].tolist(), radius=radius, scales=scales[i].tolist(), quaternion=quaternions[i].tolist())
                 if colors is not None:
                     sphere.update({"color": colors[i].tolist()})
                 spheres.append(sphere)
@@ -667,7 +676,7 @@ class Wis3D:
             if len(radius) != len(centers):
                 raise NotImplementedError()
             for i in range(len(centers)):
-                sphere = dict(center=centers[i].tolist(), radius=radius[i].tolist())
+                sphere = dict(center=centers[i].tolist(), radius=radius[i].tolist(), scales=scales[i].tolist(), quaternion=quaternions[i].tolist())
                 if colors is not None:
                     sphere.update({"color": colors[i].tolist()})
                 spheres.append(sphere)

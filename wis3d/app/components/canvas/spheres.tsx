@@ -11,11 +11,11 @@ interface IProps {
     sphereColors?: boolean;
 }
 
-function getMaterial(material: string) {
+function getMaterial(material: string, color: string | number) {
     if (material === "MeshNormalMaterial") {
-        return (<meshNormalMaterial transparent={true} opacity={0.5}/>);
+        return (<meshNormalMaterial transparent={true} opacity={0.8}/>);
     } else if (material === "MeshBasicMaterial") {
-        return (<meshBasicMaterial transparent={true} opacity={0.5}/>);
+        return (<meshBasicMaterial color={color} transparent={true} opacity={0.7}/>);
     }
 }
 
@@ -30,7 +30,7 @@ export const Spheres = memo<IProps>(function Spheres(props) {
         <group visible={visible}>
             {spheres.map((sphere, index) => {
                 const {center, radius, color, scales, quaternion} = sphere;
-                const userColor = color ? color.map(x => x / 250) : undefined;
+                const userColor = color ? color.map(x => x / 250) : 0xffffff;
                 // const materialRef = useRef<Material>();
                 // useLayoutEffect(() => {
                 //     if (materialRef.current) materialRef.current.needsUpdate = true;
@@ -43,7 +43,7 @@ export const Spheres = memo<IProps>(function Spheres(props) {
 
                         <sphereBufferGeometry args={[radius, 30, 30]}/>
 
-                        {getMaterial(material)}
+                        {getMaterial(material, userColor)}
 
                     </mesh>
                 )
