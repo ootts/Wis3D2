@@ -1,5 +1,5 @@
 # Wis3D: A web-based 3D visualization tool for 3D computer vision
-[Online Demo](http://wis3d.idr.ai/) | [Installation](#basic-installation) | [Tutorial](#basic-installation) | [Documentation](https://wis3d.readthedocs.io/en/latest/)
+[Installation](#basic-installation) | [Tutorial](#basic-installation) | [Documentation](https://wis3d2.readthedocs.io/en/latest/)
 
 Wis3D is a web-based 3D visualization tool built for 3D computer vision researchers. You can import 3D bounding box, point clouds, meshes and feature correspondences directly from your python code and view them in your local browser. You can think of it as [TensorBoard](https://www.tensorflow.org/tensorboard) but with 3D data as the first-class citizen.
 <p align="center">
