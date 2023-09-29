@@ -5,6 +5,8 @@ Introduction
 Wis3D: A web-based 3D visualization tool for 3D computer vision
 ================================================================
 
+This documentation has been merged into the official documentation page: https://wis3d-doc.readthedocs.io/en/latest.
+
 Wis3D is a tool for providing the visualization and tooling needed during the 3D machine learning workflow. 
 It enables visualizing and interaction with 3D objects and keypoint correspondences in Web browsers. 
 The visualizer contains works like `Tensorboard <https://www.tensorflow.org/tensorboard>`_, but mainly for 3D visualization.
