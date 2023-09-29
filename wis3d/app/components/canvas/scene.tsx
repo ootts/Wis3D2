@@ -362,12 +362,12 @@ const VoxelSet = memo<{ items?: IObject[]; store?: StoreType }>(function VoxelSe
 });
 
 const sphereSchema = {
-    // material: {
-    //     label: "material",
-    //     hint: "material",
-    //     options: ["MeshBasicMaterial", "MeshNormalMaterial"],
-    //     value: (JSON.parse(localStorage.getItem("sphere.material")) as string) ?? "MeshNormalMaterial"
-    // },
+    material: {
+        label: "material",
+        hint: "material",
+        options: ["MeshBasicMaterial", "MeshNormalMaterial"],
+        value: (JSON.parse(localStorage.getItem("sphere.material")) as string) ?? "MeshNormalMaterial"
+    },
     sphereColors: {
         label: "sphere colors",
         hint: "sphere colors",
@@ -377,8 +377,7 @@ const sphereSchema = {
 
 const SphereSet = memo<{ items?: IObject[]; store?: StoreType }>(function SphereSet(props) {
     const {items, store} = props;
-    // const {material, sphereColors} = useControls("sphere", sphereSchema, {store}, []);
-    const {sphereColors} = useControls("sphere", sphereSchema, {store}, []);
+    const {material, sphereColors} = useControls("sphere", sphereSchema, {store}, []);
 
     return (
         <group>
@@ -388,7 +387,7 @@ const SphereSet = memo<{ items?: IObject[]; store?: StoreType }>(function Sphere
                     url={obj.url}
                     defaultColor={obj.color}
                     visible={obj.visible}
-                    // material={material}
+                    material={material}
                     sphereColors={sphereColors}
                 />
             ))}

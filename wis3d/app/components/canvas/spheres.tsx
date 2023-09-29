@@ -5,65 +5,24 @@ import {centerOnDbClick} from "./trackball-controls";
 
 interface IProps {
     url: string;
-    // material?: string;
+    material?: string;
     defaultColor?: string;
     visible?: boolean;
     sphereColors?: boolean;
 }
 
-function gmat() {
-    return (<meshNormalMaterial transparent={true} opacity={0.5}/>);
+function getMaterial(material: string) {
+    if (material === "MeshNormalMaterial") {
+        return (<meshNormalMaterial transparent={true} opacity={0.5}/>);
+    } else if (material === "MeshBasicMaterial") {
+        return (<meshBasicMaterial transparent={true} opacity={0.5}/>);
+    }
 }
 
-function getMaterial(
-    material: string,
-    ref: MutableRefObject<Material>,
-    // vertexColors: boolean,
-    color: string | number,
-    // wireframe: boolean,
-    // flatShading: boolean,
-    // shininess: number,
-    // side: Side
-) {
-    return (
-        <meshNormalMaterial
-            ref={ref}
-            // vertexColors={vertexColors}
-            // color={color}
-            // wireframe={wireframe}
-            // side={side}
-            // flatShading={flatShading}
-        />
-    );
-    // console.log("material", material);
-    // switch (material) {
-    //     case "MeshNormalMaterial":
-    //         return (
-    //             <meshNormalMaterial
-    //                 ref={ref}
-    //                 // vertexColors={vertexColors}
-    //                 color={color}
-    //                 // wireframe={wireframe}
-    //                 // side={side}
-    //                 // flatShading={flatShading}
-    //             />
-    //         );
-    //     case "MeshBasicMaterial":
-    //     default:
-    //         return (
-    //             <meshBasicMaterial ref={ref}
-    //                 // vertexColors={vertexColors}
-    //                                color={color}
-    //                 // wireframe={wireframe}
-    //                 // side={side}
-    //             />
-    //         );
-    // }
-}
 
 export const Spheres = memo<IProps>(function Spheres(props) {
-    // const {url, defaultColor, material, visible = true, sphereColors} = props;
-    const {url, defaultColor, visible = true, sphereColors} = props;
+    const {url, defaultColor, material, visible = true, sphereColors} = props;
+    // const {url, defaultColor, visible = true, sphereColors} = props;
     const spheres = useXHR(url, "GET", "json", []);
 
 
@@ -84,7 +43,7 @@ export const Spheres = memo<IProps>(function Spheres(props) {
 
                         <sphereBufferGeometry args={[radius, 30, 30]}/>
 
-                        {gmat()}
+                        {getMaterial(material)}
 
                     </mesh>
                 )
