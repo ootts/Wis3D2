@@ -5,5 +5,5 @@ cherrypy
 pillow
 scipy
 transforms3d
-# torch
+torch
 termcolor
