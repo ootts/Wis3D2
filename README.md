@@ -1,3 +1,5 @@
+# This repo has been merged into [the official repo](https://github.com/zju3dv/Wis3D).
+
 # Wis3D: A web-based 3D visualization tool for 3D computer vision
 [Installation](#basic-installation) | [Tutorial](#basic-installation) | [Documentation](https://wis3d2.readthedocs.io/en/latest/)
 
