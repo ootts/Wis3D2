@@ -16,7 +16,7 @@ and download the latest release. Then run
 
 .. code-block:: bash
 
-    pip install wis3d
+    pip install wis3d2
 
 
 Verify installation
