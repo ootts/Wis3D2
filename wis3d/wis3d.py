@@ -76,15 +76,7 @@ class Wis3D:
     default_xyz_pattern = ('x', 'y', 'z')
     sequence_ids = {}
 
-    def __init__(
-            self,
-            out_folder: str,
-            sequence_name: str,
-            xyz_pattern=None,
-            auto_increase=True,
-            auto_remove=True,
-            enable: bool = True
-    ):
+    def __init__(self, out_folder: str, sequence_name: str, xyz_pattern=None, auto_increase=True, auto_remove=True, enable: bool = True):
         """
         Initialize Wis3D
 
@@ -273,14 +265,7 @@ class Wis3D:
         pass
 
     @overload
-    def add_mesh(
-            self,
-            vertices: Union[np.ndarray, torch.Tensor],
-            faces: Union[np.ndarray, torch.Tensor],
-            vertex_colors: Union[np.ndarray, torch.Tensor],
-            *,
-            name: str = None
-    ) -> None:
+    def add_mesh(self, vertices: Union[np.ndarray, torch.Tensor], faces: Union[np.ndarray, torch.Tensor], vertex_colors: Union[np.ndarray, torch.Tensor], *, name: str = None) -> None:
         """
         Add a mesh loaded by mesh definition
 
@@ -496,8 +481,7 @@ class Wis3D:
         with open(filename, "w") as f:
             f.write(json.dumps(boxes))
 
-    def add_lines(self, start_points: Union[np.ndarray, torch.Tensor], end_points: Union[np.ndarray, torch.Tensor], colors: Union[np.ndarray, torch.Tensor] = None, *, name: str = None
-                  ) -> None:
+    def add_lines(self, start_points: Union[np.ndarray, torch.Tensor], end_points: Union[np.ndarray, torch.Tensor], colors: Union[np.ndarray, torch.Tensor] = None, *, name: str = None) -> None:
         """
         Add lines by points
 
@@ -619,16 +603,7 @@ class Wis3D:
             with open(filename, "w") as f:
                 f.write(json.dumps(data))
 
-    def add_spheres(
-            self,
-            centers: Union[np.ndarray, torch.Tensor],
-            radius: Union[float, np.ndarray, torch.Tensor],
-            colors=None,
-            scales: Union[np.ndarray, torch.Tensor] = [1, 1, 1],
-            quaternions: Union[np.ndarray, torch.Tensor] = [0, 0, 0, 1],
-            *,
-            name=None
-    ) -> None:
+    def add_spheres(self, centers: Union[np.ndarray, torch.Tensor], radius: Union[float, np.ndarray, torch.Tensor], colors=None, scales: Union[np.ndarray, torch.Tensor] = [1, 1, 1], quaternions: Union[np.ndarray, torch.Tensor] = [0, 0, 0, 1], *, name=None) -> None:
         """
         Add spheres
 
@@ -684,10 +659,7 @@ class Wis3D:
         with open(filename, "w") as f:
             f.write(json.dumps(spheres))
 
-    def add_camera_trajectory(
-            self, poses: Union[np.ndarray, torch.Tensor], is_opencv=None,
-            *, name: str = None
-    ) -> None:
+    def add_camera_trajectory(self, poses: Union[np.ndarray, torch.Tensor], is_opencv=None, *, name: str = None) -> None:
         """
         Add a camera trajectory
 
@@ -721,20 +693,7 @@ class Wis3D:
         with open(filename, "w") as f:
             f.write(json.dumps(dict(eulers=quats, positions=positions.tolist())))
 
-    def add_keypoint_correspondences(
-            self,
-            img0: Union[Image.Image, np.ndarray, torch.Tensor, str],
-            img1: Union[Image.Image, np.ndarray, torch.Tensor, str],
-            kpts0: Union[np.ndarray, torch.Tensor],
-            kpts1: Union[np.ndarray, torch.Tensor],
-            *,
-            unmatched_kpts0: Union[np.ndarray, torch.Tensor] = None,
-            unmatched_kpts1: Union[np.ndarray, torch.Tensor] = None,
-            metrics: Dict[str, Iterable[int]] = None,
-            booleans: Dict[str, Iterable[bool]] = None,
-            meta: Dict[str, Any] = None,
-            name: str = None
-    ) -> None:
+    def add_keypoint_correspondences(self, img0, img1, kpts0: Union[np.ndarray, torch.Tensor], kpts1, *, unmatched_kpts0=None, unmatched_kpts1=None, metrics: Dict[str, Iterable[int]] = None, booleans: Dict[str, Iterable[bool]] = None, meta: Dict[str, Any] = None, name: str = None) -> None:
         """
         Add keypoint correspondences
 
