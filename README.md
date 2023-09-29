@@ -13,7 +13,7 @@ Wis3D is a web-based 3D visualization tool built for 3D computer vision research
 ### Install from PyPI
 
 ```bash
-pip install wis3d
+pip install https://ootts.github.io/wis3d-2.0.0-py3-none-any.whl
 ```
 
 ### or Build from source
